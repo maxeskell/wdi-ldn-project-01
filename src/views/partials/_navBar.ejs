@@ -1,0 +1,14 @@
+  <nav class="container">
+    <ul class="menu">&#9776;</li>
+      <li><a href="/">Home</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#gallery">Map</a></li>
+      <li><a href="#menus">Add wildlife</a></li>
+      <% if(locals.isAuthenticated) { %>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Login</a></li>
+          <% } %>
+    </ul>

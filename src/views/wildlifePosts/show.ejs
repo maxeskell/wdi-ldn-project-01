@@ -1,0 +1,12 @@
+<h1>Show</h1>
+
+<h2><%= wildlifePost.title %></h2>
+<h3><%= wildlifePost.author %></h3>
+<p><%= wildlifePost.description %></p>
+
+<a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="button button-primary">Edit</a>
+
+<form action="/wildlifePosts/<%= wildlifePost.id %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE"/>
+  <button class="button button-primary">Delete</button>
+</form>

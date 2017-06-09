@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wildlife log</title>
+  <%- include partials/_stylesheets %>
+  <%- include partials/_scripts %>
+</head>
+
+<body>
+  <%- include partials/_navBar %>
+
+    <main class="container">
+      <div class="section">
+        <%- include partials/_messages %>
+          <div class="columns">
+            <%- body %>
+          </div>
+      </div>
+    </main>
+
+    <%- include partials/_footer %>
+
+</body>
+
+</html>

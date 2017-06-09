@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
   email: { type: String },
   image: { type: String },
+  postcode: {type: String },
   password: { type: String },
   githubId: { type: Number }
 });
@@ -17,7 +17,6 @@ userSchema
 
 // lifecycle hook - mongoose middleware
 userSchema.pre('validate', function checkPassword(next) {
-//ensure that user has used email & password or github to login
   if(!this.password && !this.githubId) {
     this.invalidate('password', 'required');
   }

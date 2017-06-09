@@ -1,0 +1,24 @@
+<h1>Edit</h1>
+
+<div class="row">
+  <form class="six columns" method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
+    <input type="hidden" name="_method" value="PUT">
+
+    <div>
+      <label for="title">Title</label>
+      <input class="u-full-width" type="text" name="title" id="title" value="<%= wildlifePost.title %>">
+    </div>
+
+    <div>
+      <label for="author">Author</label>
+      <input class="u-full-width" type="text" name="author" id="author" value="<%= wildlifePost.author %>">
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea class="u-full-width" name="description"><%= wildlifePost.description %></textarea>
+    </div>
+
+    <button class="u-full-width button-primary">Create</button>
+  </form>
+</div>

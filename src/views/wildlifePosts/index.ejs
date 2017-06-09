@@ -1,0 +1,11 @@
+<h1>Index</h1>
+
+<ul>
+  <% wildlifePosts.forEach((wildlifePost) => { %>
+    <li>
+      <a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a>
+      <h4><%= wildlifePost.author %></h4>
+      <p><%= wildlifePost.description %></p>
+    </li>
+  <% }); %>
+</ul>
