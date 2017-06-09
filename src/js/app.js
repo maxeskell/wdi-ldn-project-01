@@ -1,1 +1,5 @@
-console.log('js loaded');
+$(() => {
+  console.log('JS and JQUERY loaded and working');
+
+
+});
