@@ -1,5 +1,7 @@
 <h1>Edit</h1>
 
+<%# enctype="multipart/form-data%>
+
 <div class="row">
   <form class="six columns" method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
     <input type="hidden" name="_method" value="PUT">
@@ -10,13 +12,28 @@
     </div>
 
     <div>
-      <label for="author">Author</label>
-      <input class="u-full-width" type="text" name="author" id="author" value="<%= wildlifePost.author %>">
+      <label for="createdBy">Created by</label>
+      <input class="u-full-width" type="text" name="createdBy" id="createdBy" value="<%= wildlifePost.createdBy %>">
+    </div>
+
+    <div>
+      <label for="mainContent">Content by</label>
+      <input class="u-full-width" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>">
     </div>
 
     <div>
       <label for="description">Description</label>
       <textarea class="u-full-width" name="description"><%= wildlifePost.description %></textarea>
+    </div>
+
+    <div>
+      <label for="lat">Lattitude</label>
+      <textarea class="u-full-width" name="lat"><%= wildlifePost.lat %></textarea>
+    </div>
+
+    <div>
+      <label for="lon">Longditude</label>
+      <textarea class="u-full-width" name="lon"><%= wildlifePost.lon %></textarea>
     </div>
 
     <button class="u-full-width button-primary">Create</button>

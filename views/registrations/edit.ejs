@@ -1,0 +1,16 @@
+<form method="POST" action="/profile" enctype="multipart/form-data">
+  <div>
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" value="<%= user.username %>">
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>">
+  </div>
+  <div>
+    <label for="image">Image</label>
+    <input type="file" name="image" id="image">
+  </div>
+
+  <button>Update</button>
+</form>

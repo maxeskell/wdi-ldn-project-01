@@ -1,5 +1,7 @@
 <h1>New</h1>
 
+<%# enctype="multipart/form-data%>
+
 <div class="row">
   <form class="six columns" method="POST" action="/wildlifePosts">
     <div>
@@ -8,13 +10,28 @@
     </div>
 
     <div>
-      <label for="author">Author</label>
-      <input class="u-full-width" type="text" name="author" id="author">
+      <label for="createdBy">Created by</label>
+      <input class="u-full-width" type="text" name="createdBy" id="createdBy">
+    </div>
+
+    <div>
+      <label for="mainContent">Content</label>
+      <textarea class="u-full-width" name="mainContent"></textarea>
     </div>
 
     <div>
       <label for="description">Description</label>
       <textarea class="u-full-width" name="description"></textarea>
+    </div>
+
+    <div>
+      <label for="lat">Lattiutude</label>
+      <textarea class="u-full-width" name="lat"></textarea>
+    </div>
+
+    <div>
+      <label for="lon">Longditude</label>
+      <textarea class="u-full-width" name="lon"></textarea>
     </div>
 
     <button class="button-primary u-full-width">Create</button>

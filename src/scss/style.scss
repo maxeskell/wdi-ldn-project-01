@@ -6,6 +6,10 @@ $secondary-highlight-color: #b9ac5a;
 $main-font-stack: 'Karla', sans-serif;
 
 body {
+  background-color: $primary-highlight-color;
+}
+
+.homepage {
   font-family: $main-font-stack;
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/images/mossy-tree.jpg');
@@ -23,6 +27,12 @@ body {
   }
 }
 
+.container {
+  margin: 10%;
+  background-color: $secondary-highlight-color;
+
+}
+
 .header-styles {
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -30,7 +40,7 @@ body {
 }
 
 a {
-  color: black;
+  color: #485e82;
   text-decoration: none;
 }
 
@@ -57,11 +67,12 @@ header {
       list-style: none;
       padding: 0;
       margin: 0;
+      float: right;
       li {
-        float: right;
+        float: left;
         margin-left: 20px;
         line-height: 40px;
-        &:last-of-type {
+        &:first-of-type {
           margin-left: 0;
         }
         &.menu {

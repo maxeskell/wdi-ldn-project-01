@@ -1,8 +1,11 @@
 <h1>Show</h1>
 
 <h2><%= wildlifePost.title %></h2>
-<h3><%= wildlifePost.author %></h3>
+<h3><%= wildlifePost.createdBy %></h3>
+<p><%= wildlifePost.mainContent %></p>
 <p><%= wildlifePost.description %></p>
+<p><%= wildlifePost.lat %></p>
+<p><%= wildlifePost.lon %></p>
 
 <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="button button-primary">Edit</a>
 
