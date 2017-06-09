@@ -1,0 +1,15 @@
+<div class="column">
+  <% if (user.image) { %>
+    <img src="<%= user.image %>" alt="<%= user.username %>">
+  <% } %>
+  <h1 class="title"><%= user.username %></h1>
+  <form method="POST" action="/profile">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="button is-danger">Delete Account</button>
+  </form>
+</div>
+<div class="column">
+  <div class="box">
+    <%= user %>
+  </div>
+</div>

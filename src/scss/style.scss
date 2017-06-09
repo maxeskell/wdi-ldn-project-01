@@ -110,6 +110,10 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100vw;
+  p {
+    float: left;
+    margin: 10px 10px;
+  }
 }
 
 @media only screen and (max-width: 575px) {
