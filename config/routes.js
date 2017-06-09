@@ -4,7 +4,7 @@ const sessions = require('../controllers/sessions');
 const oauth = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
 
-router.get('/', (req, res) => res.render('statics/index'));
+router.get('/', (req, res) => res.render('views/statics/index'));
 
 router.route('/profile')
   .get(secureRoute, registrations.show);
