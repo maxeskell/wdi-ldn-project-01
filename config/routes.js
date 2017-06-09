@@ -4,6 +4,7 @@ const registrations = require('../controllers/registrations');
 const sessions = require('../controllers/sessions');
 const oauth = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
+const upload = require('../lib/upload');
 
 router.get('/', (req, res) => res.render('statics/index'));
 
@@ -23,9 +24,8 @@ router.route('/wildlifePosts/:id/edit')
   .get(wildlifePostsController.edit);
 
 router.route('/profile')
-  .get(secureRoute, registrations.show);
-
-router.route('/profile')
+  .get(secureRoute, registrations.show)
+  .post(secureRoute, upload.single('image'), registrations.update)
   .delete(secureRoute, registrations.delete);
 
 router.route('/register')

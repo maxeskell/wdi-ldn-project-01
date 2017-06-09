@@ -30,6 +30,9 @@ function wildlifePostsShow(req, res) {
 }
 
 function wildlifePostsCreate(req, res) {
+
+  if(req.file) req.body.image = req.file.key;
+  
   wildlifePosts
     .create(req.body)
     .then(() => {

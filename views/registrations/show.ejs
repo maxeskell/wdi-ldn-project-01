@@ -1,6 +1,6 @@
 <div class="col">
   <% if (user.image) { %>
-    <img src="<%= user.image %>" alt="<%= user.username %>">
+    <img src="<%= user.imageSRC %>" alt="<%= user.username %>">
   <% } %>
   <h2 class="title"><%= user.username %></h2>
   <form method="POST" action="/profile">
