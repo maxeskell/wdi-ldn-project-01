@@ -1,10 +1,26 @@
-$heineken-color: #F06000;
+@import "bootstrap/bootstrap-grid";
+$main-text-color: #485e82;
+$main-background-color: #9ca9bf;
+$primary-highlight-color: #523a32;
+$secondary-highlight-color: #b9ac5a;
+$main-font-stack: 'Karla', sans-serif;
 
 body {
-  font-family: 'Karla', sans-serif;
-  background-image: url('/assets/images/mossy-tree.jpg');
-  background-color: #cccccc;
-  background-size: 100%;
+  font-family: $main-font-stack;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/images/mossy-tree.jpg');
+  background-color: #9ca9bf;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  h1 {
+    font-size: 75px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $main-text-color;
+  }
 }
 
 .header-styles {
@@ -23,22 +39,6 @@ h1, h2, h3 {
   margin-top: 0;
 }
 
-#hero {
-  height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://dc8gwjuur0w0x.cloudfront.net/lists/avatars/000/000/047/original_o-PINT-GLASS-BEER-facebook.jpg?1473216955');
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  h1 {
-    font-size: 36px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
-}
-
 header {
   position: fixed;
   top: 0;
@@ -46,13 +46,11 @@ header {
   right: 0;
   z-index: 2;
   height: 40px;
-  background-color: (20, 20, 20, 0);
+  background-color: rgba(156, 169, 191, 0.9);
   transition: background-color 0.2s ease;
   &.translucent {
-    background-color: rgba(20, 20, 20, 0.6);
+    background-color: rgba(156, 169, 191, 0.9);
   }
-
-
 
   nav {
     ul {
@@ -67,13 +65,13 @@ header {
           margin-left: 0;
         }
         &.menu {
-          color: white;
+          color: $main-text-color;
           cursor: pointer;
           font-size: 20px;
           display: none;
         }
         a {
-          color: white;
+          color: $main-text-color;
           @extend .header-styles;
         }
       }
@@ -89,7 +87,7 @@ section {
     padding-top: 80px;
     padding-bottom: 80px;
     position: relative;
-    border-bottom: 2px solid $heineken-color;
+    border-bottom: 2px solid $main-text-color;
   }
   &:last-of-type {
     .container {
@@ -97,26 +95,7 @@ section {
     }
   }
 }
-#gallery {
-  .image {
-    background-position: center;
-    background-size: cover;
-    &:after {
-      content: "";
-      padding-bottom: 100%;
-      display: block;
-    }
-    &.image-one {
-      background-image: url('http://www.blogs.hss.ed.ac.uk/pubs-and-publications/files/2015/09/IMG_3765_2048x1366.jpg');
-    }
-    &.image-two {
-      background-image: url('http://i.huffpost.com/gen/3536950/images/n-DUCK-628x314.jpg');
-    }
-    &.image-three {
-      background-image: url('http://beerlens.com/wp-content/uploads/2012/01/IMG_9809-990.jpg');
-    }
-  }
-}
+
 #location {
   #map {
     height: 300px;
@@ -125,10 +104,12 @@ section {
 }
 
 footer {
-  background-color:  rgba(20, 20,20, 1);
-  padding: 10px 0;
+  background-color:  rgba(156, 169, 191, 0.8);
   text-align: center;
-  color: white;
+  color: $main-text-color;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
 }
 
 @media only screen and (max-width: 575px) {
