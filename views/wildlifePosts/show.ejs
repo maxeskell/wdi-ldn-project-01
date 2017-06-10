@@ -1,15 +1,34 @@
 <h1>Show</h1>
 
 <h2><%= wildlifePost.title %></h2>
-<h3><%= wildlifePost.createdBy %></h3>
+<h3><%= wildlifePost.createdBy.username %></h3>
 <p><%= wildlifePost.mainContent %></p>
 <p><%= wildlifePost.description %></p>
 <p><%= wildlifePost.lat %></p>
 <p><%= wildlifePost.lon %></p>
 
-<a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="button button-primary">Edit</a>
+<% if(locals.isAuthenticated && wildlifePost.ownedBy(user)) { %>
 
-<form action="/wildlifePosts/<%= wildlifePost.id %>" method="POST">
-  <input type="hidden" name="_method" value="DELETE"/>
-  <button class="button button-primary">Delete</button>
-</form>
+  <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="button button-primary">Edit</a>
+
+  <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="button button-primary">Delete</button>
+  </form>
+
+<% } %>
+
+<section>
+  <h4>Comments</h4>
+  <% wildlifePost.comments.forEach((comment) => { %>
+    <p><%= comment.content %></p>
+    <small><%= comment.createdBy.username %></small>
+
+    <% if(locals.isAuthenticated && comment.ownedBy(user)) { %>
+      <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button>Delete</button>
+      </form>
+    <% } %>
+  <% }) %>
+</section>

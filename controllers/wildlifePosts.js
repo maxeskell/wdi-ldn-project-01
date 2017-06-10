@@ -1,8 +1,9 @@
-const wildlifePosts = require('../models/wildlifePost');
+const WildlifePosts = require('../models/wildlifePost');
 
 function wildlifePostsIndex(req, res) {
-  wildlifePosts
+  WildlifePosts
     .find()
+    .populate('createdBy')
     .exec()
     .then(wildlifePosts => {
       res.render('wildlifePosts/index', { wildlifePosts });
@@ -17,8 +18,9 @@ function wildlifePostsNew(req, res) {
 }
 
 function wildlifePostsShow(req, res) {
-  wildlifePosts
+  WildlifePosts
     .findById(req.params.id)
+    .populate('createdBy comments.createdBy')
     .exec()
     .then(wildlifePost => {
       if (!wildlifePost) return res.status(404).render('error', { error: 'No wildlifePost found.'});
@@ -32,21 +34,23 @@ function wildlifePostsShow(req, res) {
 function wildlifePostsCreate(req, res) {
 
   if(req.file) req.body.image = req.file.key;
-  
-  wildlifePosts
+
+  WildlifePosts
     .create(req.body)
-    .then(() => {
-      res.redirect('/wildlifePosts');
+    .then(() => res.redirect('/wildlifePosts'))
+    .catch((err) => {
+      if(err.name === 'ValidationError') return res.badRequest(`/wildlifePosts/${req.params.id}/edit`, err.toString());
     });
 }
 
 function wildlifePostsEdit(req, res)  {
-  wildlifePosts
+  WildlifePosts
     .findById(req.params.id)
     .exec()
     .then(wildlifePost => {
-      if (!wildlifePost) return res.status(404).render('error', { error: 'No wildlifePost found.'});
-      res.render('wildlifePosts/edit', { wildlifePost });
+      if(!wildlifePost) return res.redirect();
+      if(!wildlifePost.ownedBy(req.user)) return res.unauthorized(`/wildlifePosts/${wildlifePost.id}`, 'You do not have permission to edit that resource');
+      return res.render('wildlifePosts/edit', { wildlifePost });
     })
     .catch(err => {
       res.status(500).render('error', { error: err });
@@ -54,7 +58,7 @@ function wildlifePostsEdit(req, res)  {
 }
 
 function wildlifePostsUpdate(req, res) {
-  wildlifePosts
+  WildlifePosts
     .findById(req.params.id)
     .exec()
     .then(wildlifePost => {
@@ -74,7 +78,7 @@ function wildlifePostsUpdate(req, res) {
 }
 
 function wildlifePostsDelete(req, res) {
-  wildlifePosts
+  WildlifePosts
     .findById(req.params.id)
     .exec()
     .then(wildlifePost => {
@@ -89,6 +93,41 @@ function wildlifePostsDelete(req, res) {
     });
 }
 
+
+function createCommentRoute(req, res, next) {
+
+  req.body.createdBy = req.user;
+
+  WildlifePosts
+    .findById(req.params.id)
+    .exec()
+    .then((wildlifePost) => {
+      if(!wildlifePost) return res.notFound();
+
+      wildlifePost.comments.push(req.body); // create an embedded record
+      return wildlifePost.save();
+    })
+    .then((wildlifePost) => res.redirect(`/wildlifePosts/${wildlifePost.id}`))
+    .catch(next);
+}
+
+function deleteCommentRoute(req, res, next) {
+  WildlifePosts
+    .findById(req.params.id)
+    .exec()
+    .then((wildlifePost) => {
+      if(!wildlifePost) return res.notFound();
+      // get the embedded record by it's id
+      const comment = wildlifePost.comments.id(req.params.commentId);
+      comment.remove();
+
+      return wildlifePost.save();
+    })
+    .then((wildlifePost) => res.redirect(`/wildlifePosts/${wildlifePost.id}`))
+    .catch(next);
+}
+
+
 module.exports = {
   index: wildlifePostsIndex,
   new: wildlifePostsNew,
@@ -96,5 +135,7 @@ module.exports = {
   create: wildlifePostsCreate,
   edit: wildlifePostsEdit,
   update: wildlifePostsUpdate,
-  delete: wildlifePostsDelete
+  delete: wildlifePostsDelete,
+  createComemnt: createCommentRoute,
+  deleteComment: deleteCommentRoute
 };

@@ -23,6 +23,12 @@ router.route('/wildlifePosts/:id')
 router.route('/wildlifePosts/:id/edit')
   .get(secureRoute, wildlifePostsController.edit);
 
+router.route('/wildlifePosts/:id/comments')
+  .post(secureRoute, wildlifePosts.createComment);
+
+router.route('/wildlifePosts/:id/comments/:commentId')
+  .delete(secureRoute, wildlifePosts.deleteComment);
+
 router.route('/profile')
   .get(secureRoute, registrations.show);
 
