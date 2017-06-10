@@ -3,37 +3,44 @@
 <%# enctype="multipart/form-data%>
 
 <div class="row">
-  <form class="six columns" method="POST" action="/wildlifePosts">
-    <div>
+  <form class="six columns" method="POST" enctype="multipart/form-data" action="/wildlifePosts">
+    <div class="form-group">
       <label for="title">Title</label>
-      <input class="u-full-width" type="text" name="title" id="title">
+      <input class="form-control" type="text" name="title" id="title">
     </div>
 
-    <div>
+    <div class="form-group">
       <label for="createdBy">Created by</label>
-      <input class="u-full-width" type="text" name="createdBy" id="createdBy">
+      <input class="form-control" type="text" name="createdBy" id="createdBy">
     </div>
 
-    <div>
-      <label for="mainContent">Content</label>
-      <textarea class="u-full-width" name="mainContent"></textarea>
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input class="form-control-file" type="file" name="image" id="image">
+      <small id="fileHelp" class="form-text text-muted">Upload an image from your computer here (only png or jpg)</small>
+
     </div>
 
-    <div>
+    <div class="form-group">
+      <label for="mainContent">What is in the image?</label>
+      <textarea class="form-control" name="mainContent"></textarea>
+    </div>
+
+    <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="u-full-width" name="description"></textarea>
+      <textarea class="form-control" name="description"></textarea>
     </div>
 
-    <div>
+    <div class="form-group">
       <label for="lat">Lattiutude</label>
-      <textarea class="u-full-width" name="lat"></textarea>
+      <textarea class="form-control" name="lat"></textarea>
     </div>
 
-    <div>
+    <div class="form-group">
       <label for="lon">Longditude</label>
-      <textarea class="u-full-width" name="lon"></textarea>
+      <textarea class="form-control" name="lon"></textarea>
     </div>
 
-    <button class="button-primary u-full-width">Create</button>
+    <button class="btn btn-primary">Create</button>
   </form>
 </div>

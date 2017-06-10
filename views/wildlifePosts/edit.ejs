@@ -1,41 +1,39 @@
 <h1>Edit</h1>
 
-<%# enctype="multipart/form-data%>
-
 <div class="row">
-  <form class="six columns" method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
+  <form class="form-group" method="POST" enctype="multipart/form-data" action="/wildlifePosts/<%= wildlifePost.id %>">
     <input type="hidden" name="_method" value="PUT">
 
     <div>
       <label for="title">Title</label>
-      <input class="u-full-width" type="text" name="title" id="title" value="<%= wildlifePost.title %>">
+      <input class="form-control" type="text" name="title" id="title" value="<%= wildlifePost.title %>">
     </div>
 
     <div>
       <label for="createdBy">Created by</label>
-      <input class="u-full-width" type="text" name="createdBy" id="createdBy" value="<%= wildlifePost.createdBy %>">
+      <input class="form-control" type="text" name="createdBy" id="createdBy" value="<%= wildlifePost.createdBy %>">
     </div>
 
     <div>
       <label for="mainContent">Content by</label>
-      <input class="u-full-width" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>">
+      <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>">
     </div>
 
     <div>
       <label for="description">Description</label>
-      <textarea class="u-full-width" name="description"><%= wildlifePost.description %></textarea>
+      <textarea class="form-control" name="description"><%= wildlifePost.description %></textarea>
     </div>
 
     <div>
       <label for="lat">Lattitude</label>
-      <textarea class="u-full-width" name="lat"><%= wildlifePost.lat %></textarea>
+      <textarea class="form-control" name="lat"><%= wildlifePost.lat %></textarea>
     </div>
 
     <div>
       <label for="lon">Longditude</label>
-      <textarea class="u-full-width" name="lon"><%= wildlifePost.lon %></textarea>
+      <textarea class="form-control" name="lon"><%= wildlifePost.lon %></textarea>
     </div>
 
-    <button class="u-full-width button-primary">Create</button>
+    <button class="form-control button-primary">Create</button>
   </form>
 </div>

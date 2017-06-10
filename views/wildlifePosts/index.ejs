@@ -1,14 +1,25 @@
-<h2>Index/gallery</h2>
 
-<ul>
-  <% wildlifePosts.forEach((wildlifePost) => { %>
-    <li>
-      <a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a>
-      <h4><%= wildlifePost.createdBy %></h4>
-      <p><%= wildlifePost.mainContent %></p>
-      <p><%= wildlifePost.description %></p>
-      <p><%= wildlifePost.lat %></p>
-      <p><%= wildlifePost.lon %></p>
-    </li>
-  <% }); %>
-</ul>
+<section class="jumbotron">
+  <div class="container">
+    <h2 class="jumbotron-heading">Index/gallery</h2>
+    <p class="lead text-muted"> see images below</p>
+  </div>
+</section>
+
+<div class="album text-muted">
+
+
+<div class="container">
+  <div class="row">
+
+    <% wildlifePosts.forEach((wildlifePost) => { %>
+
+    <div class="card">
+      <img data-src="holder.js/100px280/thumb" alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="" data-holder-rendered="true">
+      <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
+      <% }); %>
+
+    </div>
+  </div>
+</div>
+</div>

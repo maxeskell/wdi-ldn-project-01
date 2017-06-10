@@ -2,17 +2,17 @@
   <h1 class="title">Login</h1>
 
   <form method="POST" action="/login">
-    <div class="field">
+    <div class="form-group">
       <label class="label" for="email">Email</label>
-      <input class="input" type="text" name="email" id="email" required>
+      <input class="form-control" type="text" name="email" id="email" required>
     </div>
-    <div class="field">
+    <div class="form-group">
       <label class="label" for="password">Password</label>
-      <input class="input" type="password" name="password" id="password" required>
+      <input class="form-control" type="password" name="password" id="password" required>
     </div>
 
-    <button class="button">Login</button>
+    <button class="btn btn-primary">Login</button>
   </form>
   <hr/>
-  <a href="<%= oauth.github.getLoginURL() %>" target="_blank" class="button is-primary"><span class="icon"><i class="fa fa-github"></i></span><span>Login With Github</span></a>
+  <a href="<%= oauth.github.getLoginURL() %>" target="_blank" class="btn btn-primary"><span class="icon"><i class="fa fa-github"></i></span><span>Login With Github</span></a>
 </div>

@@ -1,35 +1,19 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const s3 = require('../lib/s3');
 
 const userSchema = new mongoose.Schema({
+  username: { type: String, required: true },
   email: { type: String },
   image: { type: String },
-  postcode: {type: String },
   password: { type: String },
   githubId: { type: Number }
 });
 
-//check that password has been entered correclty
 userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;
   });
-
-//add virtual file path for images incase we need to move them
-userSchema
-  .virtual('imageSRC')
-  .get(function getImageSRC() {
-    if(!this.image) return null;
-    if(this.image.match(/^http/)) return this.image;
-    return `https://s3-eu-west-2.amazonaws.com/${process.env.AWS_BUCKET_NAME_PROJECT1}/${this.image}`;
-  });
-
-//allow removal of images
-userSchema.pre('remove', function removeImage(next) {
-  s3.deleteObject({ Key: this.image }, next);
-});
 
 // lifecycle hook - mongoose middleware
 userSchema.pre('validate', function checkPassword(next) {

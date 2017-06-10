@@ -1,4 +1,4 @@
-@import "bootstrap/bootstrap-grid";
+@import "bootstrap";
 $main-text-color: #485e82;
 $main-background-color: #9ca9bf;
 $primary-highlight-color: #523a32;
@@ -28,7 +28,7 @@ body {
 }
 
 .container {
-  margin: 10%;
+  margin: 5%;
   background-color: $secondary-highlight-color;
 
 }
