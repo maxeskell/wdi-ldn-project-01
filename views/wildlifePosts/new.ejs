@@ -1,3 +1,6 @@
+<div class="col">
+  <h2 class="title">Create a new wildlife log</h2>
+
 <form method="POST" enctype="multipart/form-data" action="/wildlifePosts">
 <div class="form-group">
       <label for="title">Image title</label>
@@ -9,12 +12,11 @@
       <label for="image">Image</label>
       <input class="form-control-file" type="file" name="image" id="image">
       <small id="fileHelp" class="form-text text-muted">Upload an image from your computer here (only png or jpg)</small>
-
     </div>
 
     <div class="form-group">
       <label for="mainContent">What is in the image?</label>
-      <textarea class="form-control" name="mainContent"></textarea>
+      <input class="form-control" type="text" name="mainContent" id="mainContent">
     </div>
 
     <div class="form-group">
@@ -24,13 +26,15 @@
 
     <div class="form-group">
       <label for="lat">Lattiutude</label>
-      <textarea class="form-control" name="lat"></textarea>
+      <input class="form-control" type="number" name="lat" id="lat">
     </div>
 
     <div class="form-group">
       <label for="lon">Longditude</label>
-      <textarea class="form-control" name="lon"></textarea>
+      <input class="form-control" type="number" name="lon" id="lon">
     </div>
 
     <button class="btn btn-primary">Create</button>
 </form>
+
+</div>

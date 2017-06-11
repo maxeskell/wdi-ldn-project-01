@@ -9,7 +9,7 @@ function wildlifePostsIndex(req, res) {
       res.render('wildlifePosts/index', { wildlifePosts });
     })
     .catch(err => {
-      res.status(500).render('error', { error: err });
+      res.status(500).render('/statics/500', { error: err });
     });
 }
 
@@ -23,17 +23,19 @@ function wildlifePostsShow(req, res) {
     .populate('createdBy comments.createdBy')
     .exec()
     .then(wildlifePost => {
-      if (!wildlifePost) return res.status(404).render('error', { error: 'No wildlifePost found.'});
+      if (!wildlifePost) return res.status(404).render('/statics/404', { error: 'No wildlifePost found.'});
       res.render('wildlifePosts/show', { wildlifePost });
     })
     .catch(err => {
-      res.status(500).render('error', { error: err });
+      res.status(500).render('/statics/500', { error: err });
     });
 }
 
 function wildlifePostsCreate(req, res) {
 
   if(req.file) req.body.image = req.file.key;
+  console.log(req.file);
+  console.log(req.file.key);
 
   WildlifePosts
     .create(req.body)
@@ -41,6 +43,8 @@ function wildlifePostsCreate(req, res) {
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest(`/wildlifePosts/${req.params.id}/edit`, err.toString());
     });
+
+  console.log(req.body);
 }
 
 function wildlifePostsEdit(req, res)  {
@@ -53,7 +57,7 @@ function wildlifePostsEdit(req, res)  {
       return res.render('wildlifePosts/edit', { wildlifePost });
     })
     .catch(err => {
-      res.status(500).render('error', { error: err });
+      res.status(500).render('/statics/500', { error: err });
     });
 }
 
@@ -62,7 +66,7 @@ function wildlifePostsUpdate(req, res) {
     .findById(req.params.id)
     .exec()
     .then(wildlifePost => {
-      if (!wildlifePost) return res.status(404).render('error', { error: 'No wildlifePost found.'});
+      if (!wildlifePost) return res.status(404).render('/statics/404', { error: 'No wildlifePost found.'});
 
       for(const field in req.body) {
         wildlifePost[field] = req.body[field];
@@ -73,7 +77,7 @@ function wildlifePostsUpdate(req, res) {
       res.redirect(`/wildlifePosts/${wildlifePost.id}`);
     })
     .catch(err => {
-      res.status(500).render('error', { error: err });
+      res.status(500).render('/statics/500', { error: err });
     });
 }
 
@@ -82,14 +86,14 @@ function wildlifePostsDelete(req, res) {
     .findById(req.params.id)
     .exec()
     .then(wildlifePost => {
-      if (!wildlifePost) return res.status(404).render('error', { error: 'No wildlifePost found.'});
+      if (!wildlifePost) return res.status(404).render('/statics/404', { error: 'No wildlifePost found.'});
       return wildlifePost.remove();
     })
     .then(() => {
       res.redirect('/wildlifePosts');
     })
     .catch(err => {
-      res.status(500).render('error', { error: err });
+      res.status(500).render('/statics/500', { error: err });
     });
 }
 

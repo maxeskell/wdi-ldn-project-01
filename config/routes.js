@@ -13,7 +13,8 @@ router.route('/wildlifePosts')
   .post(secureRoute, upload.single('image'), wildlifePostsController.create);
 
 router.route('/wildlifePosts/new')
-  .get(secureRoute, wildlifePostsController.new);
+  .get(secureRoute, wildlifePostsController.new)
+  .post(secureRoute, upload.single('image'), wildlifePostsController.create);
 
 router.route('/wildlifePosts/:id')
   .get(wildlifePostsController.show)
@@ -22,12 +23,12 @@ router.route('/wildlifePosts/:id')
 
 router.route('/wildlifePosts/:id/edit')
   .get(secureRoute, wildlifePostsController.edit);
-
-router.route('/wildlifePosts/:id/comments')
-  .post(secureRoute, wildlifePosts.createComment);
-
-router.route('/wildlifePosts/:id/comments/:commentId')
-  .delete(secureRoute, wildlifePosts.deleteComment);
+//
+// router.route('/wildlifePosts/:id/comments')
+//   .post(secureRoute, wildlifePostsController.createComment);
+//
+// router.route('/wildlifePosts/:id/comments/:commentId')
+//   .delete(secureRoute, wildlifePostsController.deleteComment);
 
 router.route('/profile')
   .get(secureRoute, registrations.show);

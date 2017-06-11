@@ -18,11 +18,11 @@ const wildlifePostSchema = new mongoose.Schema({
   mainContent: { type: String, required: true },
   description: { type: String },
   lat: { type: Number },
-  lon: { type: Number },
-  comments: [ commentSchema ]
+  lon: { type: Number }
+  // comments: [ commentSchema ]
 });
 
-wildlifePostSchema.methods.belongsTo = function hotelBelongsTo(user) {
+wildlifePostSchema.methods.belongsTo = function wildlifePostBelongsTo(user) {
   if(typeof this.createdBy.id === 'string') return this.createdBy.id === user.id;
   return user.id === this.createdBy.toString();
 };

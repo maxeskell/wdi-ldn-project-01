@@ -1,5 +1,4 @@
-
-<section class="jumbotron">
+<section class="jumbotron text-xs-center">
   <div class="container">
     <h2 class="jumbotron-heading">Index/gallery</h2>
     <p class="lead text-muted"> see images below</p>
@@ -7,19 +6,17 @@
 </section>
 
 <div class="album text-muted">
+  <div class="container-fluid">
+    <div class="row">
 
+      <% wildlifePosts.forEach((wildlifePost) => { %>
 
-<div class="container">
-  <div class="row">
+        <div class="card">
+          <img data-src="holder.js/100px280/thumb" alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="<%= wildlifePost.image %>" data-holder-rendered="true">
+          <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
+          <% }); %>
 
-    <% wildlifePosts.forEach((wildlifePost) => { %>
-
-    <div class="card">
-      <img data-src="holder.js/100px280/thumb" alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="" data-holder-rendered="true">
-      <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
-      <% }); %>
-
+        </div>
     </div>
   </div>
-</div>
 </div>
