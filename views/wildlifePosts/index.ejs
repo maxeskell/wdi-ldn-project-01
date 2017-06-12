@@ -10,13 +10,14 @@
     <div class="row">
 
       <% wildlifePosts.forEach((wildlifePost) => { %>
+        <div class="col-md-4">
+          <div class="card">
+            <img alt="wildlife image" style="height: 200px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
+            <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
+            </div>
+          </div>
+      <% }); %>
 
-        <div class="card">
-          <img alt="wildlife image" style="height: 150px; width: 150px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
-          <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
-          <% }); %>
-
-        </div>
     </div>
   </div>
 </div>

@@ -1,13 +1,18 @@
-<div class="card" style="width: 90%;">
+<div class="card" style="width: 50rem;">
   <img class="card-img-top" alt="wildlife image" style="height: 400px; width: 500px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
   <div class="card-block">
     <h2 class="card-title"><%= wildlifePost.title %></h2>
-    <p>Image content:  <%= wildlifePost.mainContent %></p>
-    <p>Created by:  <%= wildlifePost.createdBy.username %></p>
-    <p>Description: <%= wildlifePost.description %></p>
-    <p>Lat:  <%= wildlifePost.lat %></p>
-    <p>Lon:  <%= wildlifePost.lon %></p>
-
+  </div>
+    <div class="card-block">
+      <ul class="list-group list-group-flush">
+    <li class="list-group-item">Image content:  <%= wildlifePost.mainContent %></li>
+    <li class="list-group-item">Created by:  <%= wildlifePost.createdBy.username %></li>
+    <li class="list-group-item">Description: <%= wildlifePost.description %></li>
+    <li class="list-group-item">Lat:  <%= wildlifePost.lat %></li>
+    <li class="list-group-item">Lon:  <%= wildlifePost.lon %></li>
+  </ul>
+</div>
+<div class="btn-group"
     <!--  edit and delete buttons for the wildlife post -->
     <% if(locals.isAuthenticated && wildlifePost.belongsTo(user)) { %>
 
@@ -19,7 +24,7 @@
       </form>
 
     <% } %>
-
+</div>
     <!-- comment form for all users that are logged in  -->
     <% if(locals.isAuthenticated) { %>
       <section>
