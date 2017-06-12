@@ -12,7 +12,7 @@
       <% wildlifePosts.forEach((wildlifePost) => { %>
 
         <div class="card">
-          <img data-src="holder.js/100px280/thumb" alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="<%= wildlifePost.image %>" data-holder-rendered="true">
+          <img alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
           <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
           <% }); %>
 

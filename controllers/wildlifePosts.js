@@ -34,17 +34,14 @@ function wildlifePostsShow(req, res) {
 function wildlifePostsCreate(req, res) {
 
   if(req.file) req.body.image = req.file.key;
-  console.log(req.file);
-  console.log(req.file.key);
+  req.body.createdBy = req.user;
 
   WildlifePosts
     .create(req.body)
     .then(() => res.redirect('/wildlifePosts'))
     .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest(`/wildlifePosts/${req.params.id}/edit`, err.toString());
+      if(err.name === 'ValidationError') return res.badRequest(`/wildlifePosts/new`, err.toString());
     });
-
-  console.log(req.body);
 }
 
 function wildlifePostsEdit(req, res)  {

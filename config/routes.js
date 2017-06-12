@@ -13,8 +13,7 @@ router.route('/wildlifePosts')
   .post(secureRoute, upload.single('image'), wildlifePostsController.create);
 
 router.route('/wildlifePosts/new')
-  .get(secureRoute, wildlifePostsController.new)
-  .post(secureRoute, upload.single('image'), wildlifePostsController.create);
+  .get(secureRoute, wildlifePostsController.new);
 
 router.route('/wildlifePosts/:id')
   .get(wildlifePostsController.show)
@@ -23,7 +22,7 @@ router.route('/wildlifePosts/:id')
 
 router.route('/wildlifePosts/:id/edit')
   .get(secureRoute, wildlifePostsController.edit);
-//
+
 // router.route('/wildlifePosts/:id/comments')
 //   .post(secureRoute, wildlifePostsController.createComment);
 //
