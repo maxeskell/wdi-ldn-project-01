@@ -8,17 +8,30 @@
     <p>Lat:  <%= wildlifePost.lat %></p>
     <p>Lon:  <%= wildlifePost.lon %></p>
 
+    <!--  edit and delete buttons for the wildlife post -->
     <% if(locals.isAuthenticated && wildlifePost.belongsTo(user)) { %>
 
-      <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="btn btn-warning">Edit</a>
+      <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="btn btn-lg btn-block btn-warning">Edit post</a>
 
       <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-lg btn-block btn-danger">Delete post</button>
       </form>
 
     <% } %>
 
+    <!-- comment form for all users that are logged in  -->
+    <% if(locals.isAuthenticated) { %>
+      <section>
+        <h4>Leave a comment</h4>
+        <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
+          <textarea name="content" id="content" placeholder="Comment"></textarea>
+          <button class="btn btn-lg btn-block">Leave a comment</button>
+        </form>
+      </section>
+    <% } %>
+
+    <!-- ability to edit & delete comments if they are the users -->
     <section>
       <h4>Comments</h4>
       <% wildlifePost.comments.forEach((comment) => { %>
@@ -28,7 +41,7 @@
         <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
           <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
             <input type="hidden" name="_method" value="DELETE">
-            <button class="btn btn-primary">Delete</button>
+            <button class="btn btn-lg btn-block btn-primary">Delete comment</button>
           </form>
         <% } %>
       <% }) %>
