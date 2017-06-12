@@ -1,7 +1,7 @@
 <section class="jumbotron text-xs-center">
   <div class="container">
-    <h2 class="jumbotron-heading">Index/gallery</h2>
-    <p class="lead text-muted"> see images below</p>
+    <h2 class="jumbotron-heading">Gallery</h2>
+    <p class="lead text-muted">See wildlife images below</p>
   </div>
 </section>
 
@@ -12,7 +12,7 @@
       <% wildlifePosts.forEach((wildlifePost) => { %>
 
         <div class="card">
-          <img alt="wildlife image" style="height: 150px; width: 100%; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
+          <img alt="wildlife image" style="height: 150px; width: 150px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
           <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
           <% }); %>
 

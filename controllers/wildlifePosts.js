@@ -50,7 +50,7 @@ function wildlifePostsEdit(req, res)  {
     .exec()
     .then(wildlifePost => {
       if(!wildlifePost) return res.redirect();
-      if(!wildlifePost.ownedBy(req.user)) return res.unauthorized(`/wildlifePosts/${wildlifePost.id}`, 'You do not have permission to edit that resource');
+      if(!wildlifePost.belongsTo(req.user)) return res.unauthorized(`/wildlifePosts/${wildlifePost.id}`, 'You do not have permission to edit that resource');
       return res.render('wildlifePosts/edit', { wildlifePost });
     })
     .catch(err => {
@@ -137,6 +137,6 @@ module.exports = {
   edit: wildlifePostsEdit,
   update: wildlifePostsUpdate,
   delete: wildlifePostsDelete,
-  createComemnt: createCommentRoute,
+  createComment: createCommentRoute,
   deleteComment: deleteCommentRoute
 };
