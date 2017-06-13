@@ -9,8 +9,8 @@ const upload = require('../lib/upload');
 router.get('/', (req, res) => res.render('statics/homepage'));
 
 router.route('/wildlifePosts')
-  .get(wildlifePostsController.index);
-  // .post(secureRoute, upload.single('image'), wildlifePostsController.create);
+  .get(wildlifePostsController.index)
+  .post(secureRoute, upload.single('image'), wildlifePostsController.create);
 
 router.route('/wildlifePosts/new')
   .get(secureRoute, wildlifePostsController.new);
