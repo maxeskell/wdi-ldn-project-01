@@ -1,5 +1,5 @@
 <div class="card" style="width: 50rem;">
-  <img class="card-img-top" alt="wildlife image" style="height: 400px; width: 500px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
+  <img class="card-img-top" alt="wildlife image" style="height: 200px; width: 300px" display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
   <div class="card-block">
     <h2 class="card-title"><%= wildlifePost.title %></h2>
   </div>
@@ -8,9 +8,8 @@
     <li class="list-group-item">Image content:  <%= wildlifePost.mainContent %></li>
     <li class="list-group-item">Created by:  <%= wildlifePost.createdBy.username %></li>
     <li class="list-group-item">Description: <%= wildlifePost.description %></li>
-    <li class="list-group-item">Lat:  <%= wildlifePost.lat %></li>
-    <li class="list-group-item">Lon:  <%= wildlifePost.lon %></li>
   </ul>
+  <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div>"></div>
 </div>
 <div class="btn-group"
     <!--  edit and delete buttons for the wildlife post -->
@@ -30,7 +29,7 @@
       <section>
         <h4>Leave a comment</h4>
         <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
-          <textarea name="content" id="content" placeholder="Comment"></textarea>
+          <textarea name="content" class="form-control" id="content" placeholder="Comment"></textarea>
           <button class="btn btn-lg btn-block">Leave a comment</button>
         </form>
       </section>

@@ -17,6 +17,20 @@ function wildlifePostsNew(req, res) {
   res.render('wildlifePosts/new');
 }
 
+//map
+function wildlifePostsMap(req, res) {
+  WildlifePosts
+    .find()
+    .populate('createdBy')
+    .exec()
+    .then(wildlifePosts => {
+      res.render('wildlifePosts/map', { wildlifePosts });
+    })
+    .catch(err => {
+      res.status(500).render('/statics/500', { error: err });
+    });
+}
+
 function wildlifePostsShow(req, res) {
   WildlifePosts
     .findById(req.params.id)
@@ -128,7 +142,6 @@ function deleteCommentRoute(req, res, next) {
     .catch(next);
 }
 
-
 module.exports = {
   index: wildlifePostsIndex,
   new: wildlifePostsNew,
@@ -138,5 +151,6 @@ module.exports = {
   update: wildlifePostsUpdate,
   delete: wildlifePostsDelete,
   createComment: createCommentRoute,
-  deleteComment: deleteCommentRoute
+  deleteComment: deleteCommentRoute,
+  mapPage: wildlifePostsMap
 };

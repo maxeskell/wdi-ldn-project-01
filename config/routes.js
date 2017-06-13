@@ -15,6 +15,10 @@ router.route('/wildlifePosts')
 router.route('/wildlifePosts/new')
   .get(secureRoute, wildlifePostsController.new);
 
+  //map page
+router.route('/wildlifePosts/map')
+  .get(wildlifePostsController.mapPage);
+
 router.route('/wildlifePosts/:id')
   .get(wildlifePostsController.show)
   .post(secureRoute, upload.single('image'), wildlifePostsController.update)

@@ -29,7 +29,7 @@
     "run-sequence": "^1.2.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.66.0",
+    "aws-sdk": "^2.67.0",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
@@ -39,6 +39,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.1",
     "flash": "^1.1.0",
+    "google-vision-api-client": "0.0.3",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.5",
     "morgan": "^1.8.1",
