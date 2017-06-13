@@ -21,7 +21,7 @@ function reportError(error) {
 }
 
 gulp.task('clean', () => {
-  return gulp.src('public/**/*', { read: false })
+  return gulp.src('public/**/*.*', { read: false })
     .pipe(clean());
 });
 

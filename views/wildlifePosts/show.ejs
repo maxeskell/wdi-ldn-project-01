@@ -9,7 +9,7 @@
     <li class="list-group-item">Created by:  <%= wildlifePost.createdBy.username %></li>
     <li class="list-group-item">Description: <%= wildlifePost.description %></li>
   </ul>
-  <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div>"></div>
+  <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div></div>
 </div>
 <div class="btn-group"
     <!--  edit and delete buttons for the wildlife post -->
@@ -24,10 +24,29 @@
 
     <% } %>
 </div>
+
+<!-- ability to edit & delete comments if they are the users -->
+<section>
+  <div class="card-block">
+  <h4>Comments</h4>
+  <% wildlifePost.comments.forEach((comment) => { %>
+    <p>Comment: <%= comment.content %></p>
+    <small>Author: <%= comment.createdBy.username %></small>
+
+    <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+      <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-lg btn-block btn-primary">Delete comment</button>
+      </form>
+    <% } %>
+  <% }) %>
+</div>
+</section>
+
     <!-- comment form for all users that are logged in  -->
     <% if(locals.isAuthenticated) { %>
       <section>
-        <h4>Leave a comment</h4>
+        <h5>Leave a comment</h5>
         <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
           <textarea name="content" class="form-control" id="content" placeholder="Comment"></textarea>
           <button class="btn btn-lg btn-block">Leave a comment</button>
@@ -35,21 +54,7 @@
       </section>
     <% } %>
 
-    <!-- ability to edit & delete comments if they are the users -->
-    <section>
-      <h4>Comments</h4>
-      <% wildlifePost.comments.forEach((comment) => { %>
-        <p><%= comment.content %></p>
-        <small><%= comment.createdBy.username %></small>
 
-        <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
-          <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
-            <input type="hidden" name="_method" value="DELETE">
-            <button class="btn btn-lg btn-block btn-primary">Delete comment</button>
-          </form>
-        <% } %>
-      <% }) %>
-    </section>
 
   </div>
 </div>

@@ -5,10 +5,14 @@
 $(function() {
 
   const $map = $('#map');
+  const $lat = $('#lat');
+  const $lng = $('#lng');
+
   //set map and inforwindow to global as it is updated across several functions
   let map = null;
   let userLatLng = null;
   let infoWindow = null;
+  const data = null;
   //only call on map API if there is a map on the page
   if ($map.length > 0) initMap();
 
@@ -24,8 +28,6 @@ $(function() {
     infoWindow = new google.maps.InfoWindow();
     //get user location and re-center map
     getUserLocation();
-    //add range ring
-    addCircle();
     //if the map has a data-marker then call create markers function
     const dataArray = $map.data('markers');
     if (dataArray) createMarkers(dataArray);
@@ -51,7 +53,6 @@ $(function() {
       const postcode = $map.data('markers')[0].postcode;
       $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y`)
         .done((response) => {
-          console.log(response);
           const userLocation = response.results[0].geometry.location;
           userLatLng = {
             lat: userLocation.lat,
@@ -70,19 +71,6 @@ $(function() {
       'Error: The Geolocation service failed.' :
       'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
-  }
-
-  function addCircle() {
-    new google.maps.Circle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      map: map,
-      center: userLatLng,
-      radius: 2000
-    });
   }
 
   //function to create markers
@@ -107,75 +95,73 @@ $(function() {
   function markerClick(marker, location) {
 
     if(infoWindow) infoWindow.close();
-
-    //add constants here
+    console.log(location);
 
     infoWindow = new google.maps.InfoWindow({
       content: `
       <div class="infoWindow">
-        <h3>${location.title}</h3>
-        <img src="${location.image}">
+        <h3> <a href="/wildlifePosts/${location._id}">${location.title}</a></h3>
+        <img src="https://s3-eu-west-1.amazonaws.com/wildlife-log/${location.image}">
       </div>
       `
     });
     infoWindow.open(map, marker);
   }
 
-  //function to grab locatin value from the map
+  //function to grab location value from the map
   function captureLocation() {
     const marker = new google.maps.Marker({ map });
     map.addListener('click', (e) => {
       marker.setPosition(e.latLng);
       map.setCenter(e.latLng);
+      const imageLatLng = e.latLng;
+      $lat.val(imageLatLng.lat());
+      $lng.val(imageLatLng.lng());
     });
   }
 
 
 
 
-
-
-
-
-
-          // Cache the window and the DOM elements
-          // var $window = $(window);
-          // // var $header = $('header');
-          // // var $links = $('nav a');
-          // var $dropdown = $('.dropdown');
-          // var $menu = $('.menu');
-          //
-          // function updateHeader() {
-          //   // Grab the height of the window (the height of the image)
-          //   var viewportHeight = $window.height();
-          //   // Grab the value of how far down the user has scrolled
-          //   var scrollTop = $window.scrollTop();
-          //
-          //   // Check if we need to add or remove the 'translucent' class to the header
-          //   if (scrollTop >= viewportHeight - $header.height()) {
-          //     $header.addClass('translucent');
-          //   } else {
-          //     $header.removeClass('translucent');
-          //   }
-          // }
-
-          // function toggleMenu() {
-          //   // Hide the menu if it's visible, show it if it's hidden
-          //   $dropdown.slideToggle();
-          // }
-          //
-          // function displayLinks() {
-          //   // If the window width is greater than or equal to 575px show the links
-          //   // This is needed if the links have been hidden on a smaller screen, and then the window is resized
-          //   if ($window.width() >= 575) {
-          //     $dropdown.show();
-          //   }
-          // }
-
-          // // Event listeners
-          // // $window.on('scroll', updateHeader).trigger('scroll');
-          // $window.on('resize', displayLinks);
-          // // $links.on('click', scrollToSection);
-          // $menu.on('click', toggleMenu);
+// Grabbing the file upload element from the form
+  // var $file = document.querySelector('input[type="file"]');
+  //
+  // // When the user chooses an image grab the file, and pass it into the base64 function
+  // $file.addEventListener('change', () => {
+  //   const file = $file.files[0];
+  //   getBase64(file); // prints the base64 string
+  // });
+  //
+  // function getBase64(file) {
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = function () {
+  //     sendVisionRequest(reader.result);
+  //   };
+  //   reader.onerror = function (error) {
+  //     console.log('Error: ', error);
+  //   };
+  // }
+  //
+  // function sendVisionRequest(base64String) {
+  //   const base64 = base64String.match(/base64,(.*)$/)[1];
+  //   const data = {
+  //     requests: [{
+  //       image: { content: base64 },
+  //       features: [{ type: 'LABEL_DETECTION' }]
+  //     }]
+  //   };
+  // }
+  //
+  // $.ajax({
+  //   method: 'POST',
+  //   url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y',
+  //   data: JSON.stringify(data),
+  //   contentType: 'application/json'
+  // }).done((data) => {
+  //   console.log(data);
+  //   const description = data.responses[0];
+  //   console.log(description);
+  // });
 
 });
