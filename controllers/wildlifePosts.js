@@ -49,6 +49,7 @@ function wildlifePostsCreate(req, res) {
 
   if(req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
+  console.log(req.body);
 
   WildlifePosts
     .create(req.body)

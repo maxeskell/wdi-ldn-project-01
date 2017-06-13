@@ -10,23 +10,25 @@
     </div>
 
     <div>
-      <label for="mainContent">Content by</label>
+      <label for="mainContent">Wildlife</label>
       <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>">
     </div>
 
     <div>
-      <label for="description">Description</label>
+      <label for="description">What the wildlife is doing</label>
       <textarea class="form-control" name="description"><%= wildlifePost.description %></textarea>
     </div>
 
     <div>
       <label for="lat">Lattitude</label>
       <textarea class="form-control" name="lat"><%= wildlifePost.lat %></textarea>
+      <small id="latHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
     </div>
 
     <div>
-      <label for="lon">Longditude</label>
-      <textarea class="form-control" name="lon"><%= wildlifePost.lng %></textarea>
+      <label for="lng">Longditude</label>
+      <textarea class="form-control" name="lng"><%= wildlifePost.lng %></textarea>
+      <small id="lngHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
     </div>
 
     <button class="form-control btn btn-lg btn-block btn-primary">Update</button>

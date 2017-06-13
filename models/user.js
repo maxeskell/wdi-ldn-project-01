@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String },
   postcode: { type: String },
   lat: Number,
-  lon: Number,
+  lng: Number,
   image: { type: String },
   password: { type: String },
   githubId: { type: Number }

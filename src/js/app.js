@@ -12,7 +12,6 @@ $(function() {
   let map = null;
   let userLatLng = null;
   let infoWindow = null;
-  const data = null;
   //only call on map API if there is a map on the page
   if ($map.length > 0) initMap();
 
@@ -31,7 +30,7 @@ $(function() {
     //if the map has a data-marker then call create markers function
     const dataArray = $map.data('markers');
     if (dataArray) createMarkers(dataArray);
-      //if the map has a class of new then call click event and locastion capture function
+    //if the map has a class of new then call click event and locastion capture function
     if ($map.hasClass('new')) captureLocation();
   }
 
@@ -49,7 +48,7 @@ $(function() {
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
-    } else if($map.data('markers')[0].postcode) {
+    } else if ($map.data('markers')[0].postcode) {
       const postcode = $map.data('markers')[0].postcode;
       $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y`)
         .done((response) => {
@@ -78,8 +77,9 @@ $(function() {
     dataArray.forEach((location) => {
       const latLng = {
         lat: location.lat,
-        lng: location.lon
+        lng: location.lng
       };
+      console.log(latLng);
       const marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -94,7 +94,7 @@ $(function() {
   //add function to show info window when a marker is clicked on
   function markerClick(marker, location) {
 
-    if(infoWindow) infoWindow.close();
+    if (infoWindow) infoWindow.close();
     console.log(location);
 
     infoWindow = new google.maps.InfoWindow({
@@ -110,7 +110,9 @@ $(function() {
 
   //function to grab location value from the map
   function captureLocation() {
-    const marker = new google.maps.Marker({ map });
+    const marker = new google.maps.Marker({
+      map
+    });
     map.addListener('click', (e) => {
       marker.setPosition(e.latLng);
       map.setCenter(e.latLng);
@@ -119,49 +121,56 @@ $(function() {
       $lng.val(imageLatLng.lng());
     });
   }
+  googleVision();
+
+
+  function googleVision() {
+    // Grabbing the file upload element from the form
+    var $file = document.querySelector('input[type="file"]');
+
+    // When the user chooses an image grab the file, and pass it into the base64 function
+    $file.addEventListener('change', () => {
+      const file = $file.files[0];
+      getBase64(file); // prints the base64 string
+    });
+
+    function getBase64(file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        sendVisionRequest(reader.result);
+      };
+      reader.onerror = function(error) {
+        console.log('Error: ', error);
+      };
+    }
+
+    function sendVisionRequest(base64String) {
+      const base64 = base64String.match(/base64,(.*)$/)[1];
+      const data = {
+        requests: [{
+          image: {
+            content: base64
+          },
+          features: [{
+            type: 'LABEL_DETECTION'
+          }]
+        }]
+      };
+
+      $.ajax({
+        method: 'POST',
+        url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y',
+        data: JSON.stringify(data),
+        contentType: 'application/json'
+      }).done((response) => {
+        console.log(response);
+      });
+
+    }
+  }
 
 
 
-
-// Grabbing the file upload element from the form
-  // var $file = document.querySelector('input[type="file"]');
-  //
-  // // When the user chooses an image grab the file, and pass it into the base64 function
-  // $file.addEventListener('change', () => {
-  //   const file = $file.files[0];
-  //   getBase64(file); // prints the base64 string
-  // });
-  //
-  // function getBase64(file) {
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = function () {
-  //     sendVisionRequest(reader.result);
-  //   };
-  //   reader.onerror = function (error) {
-  //     console.log('Error: ', error);
-  //   };
-  // }
-  //
-  // function sendVisionRequest(base64String) {
-  //   const base64 = base64String.match(/base64,(.*)$/)[1];
-  //   const data = {
-  //     requests: [{
-  //       image: { content: base64 },
-  //       features: [{ type: 'LABEL_DETECTION' }]
-  //     }]
-  //   };
-  // }
-  //
-  // $.ajax({
-  //   method: 'POST',
-  //   url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y',
-  //   data: JSON.stringify(data),
-  //   contentType: 'application/json'
-  // }).done((data) => {
-  //   console.log(data);
-  //   const description = data.responses[0];
-  //   console.log(description);
-  // });
 
 });

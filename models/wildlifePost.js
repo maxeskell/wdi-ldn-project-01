@@ -20,6 +20,7 @@ const wildlifePostSchema = new mongoose.Schema({
   image: {type: String },
   lat: { type: Number },
   lng: { type: Number },
+  keywords: [{ type: String }],
   comments: [ commentSchema ]
 });
 
