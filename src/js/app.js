@@ -7,6 +7,7 @@ $(function() {
   const $map = $('#map');
   const $lat = $('#lat');
   const $lng = $('#lng');
+  const $checkboxes = $('#checkboxes');
 
   //set map and inforwindow to global as it is updated across several functions
   let map = null;
@@ -121,8 +122,8 @@ $(function() {
       $lng.val(imageLatLng.lng());
     });
   }
-  googleVision();
 
+  if ($checkboxes.length > 0) googleVision();
 
   function googleVision() {
     // Grabbing the file upload element from the form
@@ -163,8 +164,11 @@ $(function() {
         url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y',
         data: JSON.stringify(data),
         contentType: 'application/json'
-      }).done((response) => {
-        console.log(response);
+      }).done((data) => {
+        console.log(data);
+        data.responses[0].labelAnnotations.forEach((label) => {
+          $checkboxes.append(`<input class="form-control" type="checkbox" name="keywords[]" checked="checked" value="${label.description}"> ${label.description}`);
+        });
       });
 
     }
