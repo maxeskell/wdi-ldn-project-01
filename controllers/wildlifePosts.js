@@ -1,8 +1,10 @@
 const WildlifePosts = require('../models/wildlifePost');
 
 function wildlifePostsIndex(req, res) {
+  const regex = new RegExp(req.query.q, 'i');
+  const query = { title: regex };
   WildlifePosts
-    .find()
+    .find(query)
     .populate('createdBy')
     .exec()
     .then(wildlifePosts => {

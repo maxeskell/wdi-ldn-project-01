@@ -11,10 +11,14 @@ $main-font-stack: 'Karla', sans-serif;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/assets/images/mossy-tree.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: $main-font-stack;
   color: #485e82;
   text-decoration: none;
@@ -43,40 +47,40 @@ h1, h2, h3 {
   margin: 10vh 0;
 }
 
-.newPage {
+.newPage, .registerPage, .loginPage {
   background-color: white;
   margin-top: 2vh;
-}
-
-.registerPage {
-  background-color: white;
-  margin-top: 2vh;
-}
-
-.loginPage{
-  background-color: white;
-  margin-top: 2vh;
+  border: 2px solid;
+  border-radius: 10px;
 }
 
 .notification {
+  height: 5vh;
   background-color: white;
   margin-top: 2vh;
+  padding: 2px;
+  line-height: 5vh;
+  border: 2px solid;
+  border-radius: 10px;
 }
 
 .jumbotron {
   margin: 2vh;
   height: 10vh;
   text-align: center;
-  margin-bottom: 0 !important;
-  .jumbotron-heading {
-    vertical-align: middle;
-  }
+  padding-top: 2vh;
 }
 
 .card {
   margin: 10px 0;
   text-align: center;
   font-size: 80%;
+  a {
+    color: $main-text-color;
+  }
+}
+
+footer {
   a {
     color: $main-text-color;
   }
