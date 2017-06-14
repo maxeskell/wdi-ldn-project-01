@@ -1,22 +1,23 @@
-<section class="jumbotron text-xs-center">
+<section class="jumbotron text-xs-center vertical-center">
   <div class="container">
-    <h2 class="jumbotron-heading">Gallery</h2>
-    <p class="lead text-muted">See wildlife images below</p>
+    <h2 class="jumbotron-heading">Image gallery</h2>
   </div>
 </section>
 
 <div class="album text-muted">
-  <div class="container-fluid">
+  <div class="container-fluid gallery">
     <div class="row">
 
       <% wildlifePosts.forEach((wildlifePost) => { %>
         <div class="col-md-4">
-          <div class="card">
-            <img alt="wildlife image" style="height: 200px; display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
-            <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
+          <div class="card gallery">
+            <div class="cardImages rounded" <a href="/wildlifePosts/<%= wildlifePost.id %>">
+              <img alt="wildlife image" class="image mx-auto d-block img-thumbnail" style="display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
             </div>
+            <p class="card-text"><a href="/wildlifePosts/<%= wildlifePost.id %>"><h3><%= wildlifePost.title %></h3></a></p>
           </div>
-      <% }); %>
+        </div>
+        <% }); %>
 
     </div>
   </div>

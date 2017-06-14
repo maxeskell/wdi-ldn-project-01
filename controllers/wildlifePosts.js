@@ -3,6 +3,7 @@ const WildlifePosts = require('../models/wildlifePost');
 function wildlifePostsIndex(req, res) {
   const regex = new RegExp(req.query.q, 'i');
   const query = { title: regex };
+  console.log(regex);
   WildlifePosts
     .find(query)
     .populate('createdBy')
@@ -47,7 +48,7 @@ function wildlifePostsShow(req, res) {
     });
 }
 
-function wildlifePostsCreate(req, res) {
+function wildlifePostsCreate(req, res, next) {
 
   if(req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
@@ -58,6 +59,7 @@ function wildlifePostsCreate(req, res) {
     .then(() => res.redirect('/wildlifePosts'))
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest(`/wildlifePosts/new`, err.toString());
+      next(err);
     });
 }
 

@@ -5,32 +5,36 @@
 
     <div class="form-group">
       <label class="label" for="username">Name</label>
-      <input class="form-control" type="username" name="username" id="username" placeholder="Enter username">
+      <input class="form-control" type="username" name="username" id="username" placeholder="Enter username" required pattern="^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$">
+      <small id="emailHelp" class="form-text text-muted">No spaces</small>
     </div>
 
     <div class="form-group">
       <label class="exampleInputEmail1" for="email">Email</label>
-      <input class="form-control" type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <input class="form-control" type="email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required >
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else</small>
     </div>
 
     <div class="form-group">
       <label class="label" for="postcode">Postcode</label>
-      <input class="form-control" type="text" name="postcode" id="postcode" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="postcodeHelp" class="form-text text-muted">Your postcode is needed to show wildlife around you</small>
+      <input class="form-control" type="text" name="postcode" id="postcode" aria-describedby="emailHelp" placeholder="B46 1QR" required pattern="[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9][A-Z]{2}">
+      <small id="postcodeHelp" class="form-text text-muted">Your postcode is needed to show wildlife around you (use capitals and a space)</small>
     </div>
 
     <div class="form-group">
       <label class="label" for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" placeholder="Enter password">
+      <input class="form-control" type="password" name="password" id="password" placeholder="Enter password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$">
+      <small id="posswordHelp" class="form-text text-muted">Minimum eight characters, at least one letter, one number and one special character</small>
     </div>
 
     <div class="form-group">
       <label class="label" for="passwordConfirmation">Password Confirmation</label>
-      <input class="form-control" type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder="Re-enter password">
+      <input class="form-control" type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder="Re-enter password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$">
     </div>
 
+    <div class="form-group">
     <button class="btn btn-primary">Register</button>
+    </div>
 
   </form>
 </div>

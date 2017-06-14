@@ -6,14 +6,14 @@
   <form method="POST" enctype="multipart/form-data" action="/wildlifePosts">
     <div class="form-group">
       <label for="title">Image title</label>
-      <input class="form-control" type="text" name="title" id="title">
+      <input class="form-control" type="text" name="title" id="title" required maxlength="14">
       <small id="titleHelp" class="form-text text-muted">Describe your image in a few words.</small>
     </div>
 
     <div class="form-group">
       <label for="image">Image</label>
-      <input class="form-control-file" type="file" name="image" id="image">
-      <small id="fileHelp" class="form-text text-muted">Upload an image from your computer (only png or jpg)</small>
+      <input class="form-control-file" type="file" name="image" id="image" required accept="image/x-png,image/gif,image/jpeg">
+      <small id="fileHelp" class="form-text text-muted">Upload an image from your computer (only jpg, png or gif)</small>
     </div>
 
     <div class="form-group">
@@ -30,12 +30,12 @@
 
     <div class="form-group">
       <label for="mainContent">What wildlife is in the image</label>
-      <input class="form-control" type="text" name="mainContent" id="mainContent">
+      <input class="form-control" type="text" name="mainContent" id="mainContent" required maxlength="20">
     </div>
 
     <div class="form-group">
       <label for="description">Describe what the wildlife is doing</label>
-      <textarea class="form-control" name="description"></textarea>
+      <textarea class="form-control" name="description" required maxlength="100"></textarea>
     </div>
 
     <div class="btn-toolbar">

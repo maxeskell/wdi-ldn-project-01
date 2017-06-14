@@ -166,7 +166,10 @@ $(function() {
       }).done((data) => {
         console.log(data);
         data.responses[0].labelAnnotations.forEach((label) => {
-          $checkboxes.append(`<input class="form-control" type="checkbox" name="keywords[]" checked="checked" value="${label.description}"> ${label.description}`);
+          $checkboxes.append(`
+            <label>
+              <input class="form-control" type="checkbox" name="keywords[]" checked="checked" value="${label.description}"> ${label.description}
+            </label>`);
         });
       });
 

@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
+  username: { type: String, required: true, match: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/ },
   email: { type: String },
-  postcode: { type: String },
-  lat: Number,
-  lng: Number,
+  postcode: { type: String, match: /[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9][A-Z]{2}/},
+  lat: { Number },
+  lng: { Number },
   image: { type: String },
-  password: { type: String },
+  password: { type: String, match: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/ },
   githubId: { type: Number }
 });
 
