@@ -13,10 +13,10 @@ commentSchema.methods.belongsTo = function commentBelongsTo(user) {
 };
 
 const wildlifePostSchema = new mongoose.Schema({
-  title: { type: String, required: true, maxlength: 14 },
+  title: { type: String, required: true, maxlength: 20 },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  mainContent: { type: String, required: true, maxlength: 20 },
-  description: { type: String, maxlength: 100  },
+  mainContent: { type: String, required: true, maxlength: 50 },
+  description: { type: String, maxlength: 250  },
   image: {type: String },
   lat: { type: Number, required: true },
   lng: { type: Number, required: true },

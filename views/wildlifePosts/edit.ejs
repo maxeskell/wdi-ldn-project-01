@@ -8,17 +8,17 @@
 
     <div>
       <label for="title">Title</label>
-      <input class="form-control" type="text" name="title" id="title" value="<%= wildlifePost.title %>">
+      <input class="form-control" type="text" name="title" id="title" value="<%= wildlifePost.title %>" required maxlength="20">
     </div>
 
     <div>
       <label for="mainContent">Wildlife</label>
-      <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>">
+      <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>" required maxlength="50">
     </div>
 
     <div>
       <label for="description">What the wildlife is doing</label>
-      <textarea class="form-control" name="description"><%= wildlifePost.description %></textarea>
+      <textarea class="form-control" required maxlength="250" name="description"><%= wildlifePost.description %> </textarea>
     </div>
 
     <div>
@@ -34,7 +34,7 @@
     </div>
 
     <button class="form-control btn btn-lg btn-block btn-primary">Update</button>
-    
+
   </form>
 </div>
 

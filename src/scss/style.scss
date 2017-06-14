@@ -40,6 +40,15 @@ body {
   }
 }
 
+@media only screen and (max-width: 1200px) {
+    h1 {
+      font-size: 50px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+}
+
 h1, h2, h3 {
   @extend .header-styles;
   margin-top: 0;
@@ -59,23 +68,16 @@ main {
   }
 }
 
-.mapPage {
-  margin: 10vh 0;
-}
-
 .card.gallery {
   height: 260px;
   .image {
     height: 200px;
   }
-  @media only screen and (max-width: 1200px) {
-    h3 {
-      font-size: 20px;
-    }
-  }
+  border: 2px solid $main-text-color;
+  border-radius: 10px;
 }
 
-.newPage, .registerPage, .loginPage, .editPage, .profilePage, .mapPage {
+.newPage, .registerPage, .loginPage, .editPage, .profilePage, .mapPage, .showPost {
   background-color: white;
   margin-top: 2vh;
   border: 2px solid $main-text-color;
@@ -88,6 +90,12 @@ main {
 
 .checkboxes {
   padding: 0 3vw;
+}
+
+.showPost {
+  .card-block {
+    text-align: left;
+  }
 }
 
 .notification {
@@ -107,23 +115,27 @@ main {
   height: 3vh;
   text-align: center;
   padding-top: 2vh;
+  border: 2px solid $main-text-color;
+  border-radius: 10px;
 }
 
 .card {
   margin: 10px 0;
   text-align: center;
-  font-size: 80%;
+  font-size: 1rem;
   a {
     color: $main-text-color;
   }
 }
 
-.card-img-top {
-  padding-top: 3vh;
-}
-
-.boldText {
+.showPost {
+  .boldText {
   font-weight: bold;
+  font-size: 1rem;
+  }
+  .card-img-top {
+    padding-top: 3vh;
+  }
 }
 
 footer {

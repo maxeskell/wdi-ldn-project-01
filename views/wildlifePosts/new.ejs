@@ -6,7 +6,7 @@
   <form method="POST" enctype="multipart/form-data" action="/wildlifePosts">
     <div class="form-group">
       <label for="title">Image title</label>
-      <input class="form-control" type="text" name="title" id="title" required maxlength="14">
+      <input class="form-control" type="text" name="title" id="title" required maxlength="20">
       <small id="titleHelp" class="form-text text-muted">Describe your image in a few words.</small>
     </div>
 
@@ -24,18 +24,18 @@
     <input type="hidden" id="lng" name="lng" value="">
 
     <div class="form-group">
-      <label for="googleVision">What <a href="https://cloud.google.com/vision/docs/drag-and-drop">GoogleVision</a> thinks is in the image </label>
+      <label for="googleVision">What <a href="https://cloud.google.com/vision/docs/drag-and-drop" target="_blank">GoogleVision</a> thinks is in the image </label>
       <div id="checkboxes"></div>
     </div>
 
     <div class="form-group">
       <label for="mainContent">What wildlife is in the image</label>
-      <input class="form-control" type="text" name="mainContent" id="mainContent" required maxlength="20">
+      <input class="form-control" type="text" name="mainContent" id="mainContent" required maxlength="50">
     </div>
 
     <div class="form-group">
       <label for="description">Describe what the wildlife is doing</label>
-      <textarea class="form-control" name="description" required maxlength="100"></textarea>
+      <textarea class="form-control" name="description" required maxlength="250"></textarea>
     </div>
 
     <div class="btn-toolbar">
