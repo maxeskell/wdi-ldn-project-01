@@ -1,44 +1,49 @@
 <div class="card showPost">
   <img class="card-img-top img-fluid rounded mx-auto d-block" alt="wildlife image" display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
-    <h2 class="card-title"><%= wildlifePost.title %></h2>
-    <div class="card-block">
-      <ul class="list-group list-group-flush">
-         <li class="list-group-item"><span class="boldText">Wildlife in the image: &nbsp; </span>   <%= wildlifePost.mainContent %></li>
-         <li class="list-group-item"><span class="boldText">Created by: &nbsp; </span> <%= wildlifePost.createdBy.username %></li>
-         <li class="list-group-item"><span class="boldText"><a class="googleLink" href="https://cloud.google.com/vision/docs/drag-and-drop" target="_blank">GoogleVision</a> thinks this image contains: &nbsp; </label></span> <%= wildlifePost.keywords.join(', ') %></li>
-        <li class="list-group-item"><span class="boldText">Description: &nbsp; </span> <%= wildlifePost.description %></li>
-      </ul>
-      <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div></div>
-    <div class="card-block">
-        <% if(locals.isAuthenticated && wildlifePost.belongsTo(user)) { %>
-          <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="btn btn-block btn-warning">Edit post</a>
-          <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
-          <input type="hidden" name="_method" value="DELETE">
-          <button class="btn btn-block btn-danger">Delete post</button>
-          </form>
-        <% } %>
-    </div>
-    <!-- ability to edit & delete comments if they are the users -->
-      <div class="card-block">
-        <h5>Comments</h5>
-        <% wildlifePost.comments.forEach((comment) => { %>
-          <p>Comment: <%= comment.content %></p>
-          <small>Author: <%= comment.createdBy.username %></small>
-          <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
-            <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
-            <input type="hidden" name="_method" value="DELETE">
-            <button class="btn btn-block btn-primary">Delete comment</button>
-            </form>
-            <% } %>
-            <% }) %>
+  <h2 class="card-title"><%= wildlifePost.title %></h2>
 
-        <!-- comment form for all users that are logged in  -->
-    <% if(locals.isAuthenticated) { %>
-            <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
-              <textarea name="content" class="form-control" id="content" placeholder="Leave a comment here..."></textarea>
-              <button class="btn btn-block comment">Leave a comment</button>
-            </form>
+  <div class="card-block">
+
+    <ul class="list-group list-group-flush">
+       <li class="list-group-item"><span class="boldText">Wildlife in the image: &nbsp; </span>   <%= wildlifePost.mainContent %></li>
+       <li class="list-group-item"><span class="boldText">Created by: &nbsp; </span> <%= wildlifePost.createdBy.username %></li>
+       <li class="list-group-item"><span class="boldText"><a class="googleLink" href="https://cloud.google.com/vision/docs/drag-and-drop" target="_blank">GoogleVision</a> thinks this image contains: &nbsp; </label></span> <%= wildlifePost.keywords.join(', ') %></li>
+      <li class="list-group-item"><span class="boldText">Description: &nbsp; </span> <%= wildlifePost.description %></li>
+    </ul>
+
+    <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div>
+  </div>
+
+  <div class="card-block">
+    <% if(locals.isAuthenticated && wildlifePost.belongsTo(user)) { %>
+      <a href="/wildlifePosts/<%= wildlifePost.id %>/edit" class="btn btn-block btn-warning">Edit post</a>
+      <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="btn btn-block btn-danger">Delete post</button>
+      </form>
     <% } %>
+  </div>
+
+    <!-- ability to edit & delete comments if they are the users -->
+  <div class="card-block">
+    <h5>Comments</h5>
+    <% wildlifePost.comments.forEach((comment) => { %>
+      <p>Comment: <%= comment.content %></p>
+      <small>Author: <%= comment.createdBy.username %></small>
+      <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+        <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments/<%= comment.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-block btn-primary">Delete comment</button>
+        </form>
+      <% } %>
+    <% }) %>
+    <!-- comment form for all users that are logged in  -->
+    <% if(locals.isAuthenticated) { %>
+      <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
+        <textarea name="content" class="form-control" id="content" placeholder="Leave a comment here..."></textarea>
+        <button class="btn btn-block comment">Leave a comment</button>
+      </form>
+     <% } %>
   </div>
 
 </div>
