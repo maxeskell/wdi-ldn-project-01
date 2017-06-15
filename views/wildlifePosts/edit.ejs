@@ -1,41 +1,41 @@
 <div class="editPage">
 
-<div class="col">
-  <h2 class="title">Edit your wildlife image</h2>
+  <div class="col">
+    <h2 class="title">Edit your wildlife image</h2>
 
-  <form class="form-group" method="POST" enctype="multipart/form-data" action="/wildlifePosts/<%= wildlifePost.id %>">
-    <input type="hidden" name="_method" value="PUT">
+    <form class="form-group" method="POST" enctype="multipart/form-data" action="/wildlifePosts/<%= wildlifePost.id %>">
+      <input type="hidden" name="_method" value="PUT">
 
-    <div>
-      <label for="title">Title</label>
-      <input class="form-control" type="text" name="title" id="title" value="<%= wildlifePost.title %>" required maxlength="20">
-    </div>
+      <div>
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" id="title" value="<%= wildlifePost.title %>" required maxlength="20">
+      </div>
 
-    <div>
-      <label for="mainContent">Wildlife</label>
-      <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>" required maxlength="50">
-    </div>
+      <div>
+        <label for="mainContent">Wildlife</label>
+        <input class="form-control" type="text" name="mainContent" id="mainContent" value="<%= wildlifePost.mainContent %>" required maxlength="50">
+      </div>
 
-    <div>
-      <label for="description">What the wildlife is doing</label>
-      <textarea class="form-control" required maxlength="250" name="description"><%= wildlifePost.description %> </textarea>
-    </div>
+      <div>
+        <label for="description">What the wildlife is doing</label>
+        <textarea class="form-control" required maxlength="250" name="description"><%= wildlifePost.description %> </textarea>
+      </div>
 
-    <div>
-      <label for="lat">Lattitude</label>
-      <textarea class="form-control" name="lat"><%= wildlifePost.lat %></textarea>
-      <small id="latHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
-    </div>
+      <div>
+        <label for="lat">Lattitude</label>
+        <textarea class="form-control" name="lat"><%= wildlifePost.lat %></textarea>
+        <small id="latHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
+      </div>
 
-    <div>
-      <label for="lng">Longditude</label>
-      <textarea class="form-control" name="lng"><%= wildlifePost.lng %></textarea>
-      <small id="lngHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
-    </div>
+      <div>
+        <label for="lng">Longditude</label>
+        <textarea class="form-control" name="lng"><%= wildlifePost.lng %></textarea>
+        <small id="lngHelp" class="form-text text-muted">Enter new lattitude manually if you want to change location</small>
+      </div>
 
-    <button class="form-control btn btn-lg btn-block btn-primary">Update</button>
+      <button class="form-control btn btn-lg btn-block btn-primary">Update</button>
 
-  </form>
-</div>
+    </form>
+  </div>
 
 </div>
