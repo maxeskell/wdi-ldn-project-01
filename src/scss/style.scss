@@ -42,15 +42,30 @@ body {
 }
 
 //ensure that the main headings reduce in size when screen is small
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 992px) {
     h1 {
-      font-size: 50px;
+      font-size: 40px;
     }
     h2 {
-      font-size: 25px;
+      font-size: 20px;
     }
     h3 {
       font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    h3 {
+      font-size: 10px;
+    }
+    .navbar.fixed-bottom {
+      display: none;
     }
 }
 
@@ -68,9 +83,9 @@ main {
 //style homepage
 .homepageContainer {
   .homepageTitle {
-    font-size: 50px;
+    font-size: 40px;
     color: white;
-    line-height: 50px;
+    line-height: 40px;
   }
 }
 
