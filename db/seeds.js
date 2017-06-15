@@ -17,7 +17,8 @@ User
   lat: 51.515,
   lng: -0.05,
   image: 'download.jpeg',
-  password: '',
+  password: 'password',
+  passwordConfirmation: 'password',
   githubId: '',
   facebookId: ''
 }])
