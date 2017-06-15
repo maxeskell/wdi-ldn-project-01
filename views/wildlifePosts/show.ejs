@@ -1,6 +1,7 @@
 <div class="card showPost">
   <img class="card-img-top img-fluid rounded mx-auto d-block" alt="wildlife image" display: block;" src="<%= wildlifePost.imageSRC %>" data-holder-rendered="true">
   <h2 class="card-title"><%= wildlifePost.title %></h2>
+    <div class="sharethis-inline-share-buttons"></div>
 
   <div class="card-block">
 
@@ -23,8 +24,9 @@
       </form>
     <% } %>
   </div>
-
-    <!-- ability to edit & delete comments if they are the users -->
+  <!-- social media buttons -->
+  <div class="sharethis-inline-share-buttons"></div>
+  <!-- ability to edit & delete comments if they are the users -->
   <div class="card-block">
     <h5>Comments</h5>
     <% wildlifePost.comments.forEach((comment) => { %>
