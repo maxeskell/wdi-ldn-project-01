@@ -116,7 +116,7 @@ $(function() {
       content: `
       <div class="infoWindow">
         <h3> <a href="/wildlifePosts/${location._id}">${location.title}</a></h3>
-        <img src="https://s3-eu-west-1.amazonaws.com/wildlife-log/${location.image}">
+        <img src="https://s3-eu-west-1.amazonaws.com/wildlife-log/${location.image}" height="200px">
       </div>
       `
     });
