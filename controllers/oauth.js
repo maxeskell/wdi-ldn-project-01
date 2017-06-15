@@ -26,7 +26,7 @@ function github(req, res, next) {
   })
   .then((profile) => {
     return User
-      .findOne({ $or: [{ email: profile.email }, { githubId: profile.id }] })
+      .findOne({ $or: [{ githubId: profile.id }, { email: profile.email }] })
       .then((user) => {
         if(!user) {
           user = new User({
@@ -73,7 +73,7 @@ function facebook(req, res, next) {
   })
   .then((profile) => {
     return User
-      .findOne({ $or: [{ email: profile.email }, { facebookId: profile.id }] })
+      .findOne({ $or: [{ facebookId: profile.id }, { email: profile.email }] })
       .then((user) => {
         if(!user) {
           user = new User({

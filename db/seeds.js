@@ -17,10 +17,8 @@ User
   lat: 51.515,
   lng: -0.05,
   image: 'download.jpeg',
-  password: '',
-  passwordConfirmation: 'Password12345!',
-  githubId: '',
-  facebookId: ''
+  password: 'Password12345',
+  passwordConfirmation: 'Password12345!'
 }])
 .then((users) => {
   console.log(`${users.length} user(s) created!`);
