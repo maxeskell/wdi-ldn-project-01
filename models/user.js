@@ -38,7 +38,21 @@ userSchema.pre('save', function checkPassword(next) {
 });
 
 userSchema.methods.validatePassword = function validatePassword(password) {
+  if(!this.password) return false;
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.pre('remove', function removeUserPosts(next) {
+  this.model('WildlifePost')
+    .remove({ createdBy: this.id })
+    .then(() => {
+      return this.model('WildlifePost').update(
+        { 'comments.createdBy': this.id }, // this is the query
+        { $pull: { comments: { createdBy: this.id } } } // this is the update
+      );
+    })
+    .then(next)
+    .catch(next);
+});
 
 module.exports = mongoose.model('User', userSchema);
