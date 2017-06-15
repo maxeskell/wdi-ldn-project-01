@@ -18,8 +18,8 @@ User
   lng: -0.05,
   image: 'download.jpeg',
   password: '',
-  passwordConfirmation: 'password',
-  githubId: '12345',
+  passwordConfirmation: 'Password12345!',
+  githubId: '',
   facebookId: ''
 }])
 .then((users) => {
