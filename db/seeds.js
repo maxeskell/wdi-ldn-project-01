@@ -3,8 +3,8 @@ mongoose.Promise = require('bluebird');
 const { dbURI } = require('../config/environment');
 mongoose.connect(dbURI);
 
-const WildlifePost = require('../models/WildlifePost');
-const User = require('../models/User');
+const WildlifePost = require('./models/WildlifePost');
+const User = require('./models/User');
 
 User.collection.drop();
 WildlifePost.collection.drop();
