@@ -13,6 +13,9 @@ $(function() {
   let map = null;
   let userLatLng = null;
   let infoWindow = null;
+  const markers = [];
+  const bounds = new google.maps.LatLngBounds();
+  const dataArray = $map.data('markers');
   //only call on map API if there is a map on the page
   if ($map.length > 0) initMap();
 
@@ -29,7 +32,7 @@ $(function() {
     //get user location and re-center map
     getUserLocation();
     //if the map has a data-marker then call create markers function
-    const dataArray = $map.data('markers');
+    // const dataArray = $map.data('markers');
     if (dataArray) createMarkers(dataArray);
     //if the map has a class of new then call click event and locastion capture function
     if ($map.hasClass('new')) captureLocation();
@@ -45,7 +48,7 @@ $(function() {
         infoWindow.setPosition(userLatLng);
         infoWindow.setContent('You are here.');
         infoWindow.open(map);
-        map.setCenter(userLatLng);
+        setLocationandZoom();
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
@@ -58,11 +61,13 @@ $(function() {
             lat: userLocation.lat,
             lng: userLocation.lng
           };
+          setLocationandZoom();
         });
     } else {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
     }
+    // markers.push(userLatLng);
   }
   //map location error function
   function handleLocationError(browserHasGeolocation, infoWindow, userLatLng) {
@@ -75,6 +80,7 @@ $(function() {
 
   //function to create markers
   function createMarkers(dataArray) {
+    console.log('creating markers...');
     dataArray.forEach((location) => {
       const latLng = {
         lat: location.lat,
@@ -87,7 +93,10 @@ $(function() {
 
       marker.addListener('click', () => {
         markerClick(marker, location);
+        console.log('MARKERS', markers);
       });
+
+      markers.push(marker);
     });
   }
 
@@ -106,6 +115,17 @@ $(function() {
       `
     });
     infoWindow.open(map, marker);
+  }
+
+  function setLocationandZoom() {
+    //change zoom on map to show all markers
+    for (var i = 0; i < markers.length; i++) {
+      bounds.extend(markers[i].getPosition());
+    }
+
+    bounds.extend(userLatLng);
+    console.log('settting map position...');
+    map.fitBounds(bounds);
   }
 
   //function to grab location value from the map

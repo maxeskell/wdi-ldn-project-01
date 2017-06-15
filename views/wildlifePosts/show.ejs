@@ -5,7 +5,7 @@
       <ul class="list-group list-group-flush">
          <li class="list-group-item"><span class="boldText">Wildlife in the image: &nbsp; </span>   <%= wildlifePost.mainContent %></li>
          <li class="list-group-item"><span class="boldText">Created by: &nbsp; </span> <%= wildlifePost.createdBy.username %></li>
-         <li class="list-group-item"><span class="boldText"><a href="https://cloud.google.com/vision/docs/drag-and-drop" target="_blank">GoogleVision</a> thinks this image contains: &nbsp; </label></span> <%= wildlifePost.keywords.join(', ') %></li>
+         <li class="list-group-item"><span class="boldText"><a class="googleLink" href="https://cloud.google.com/vision/docs/drag-and-drop" target="_blank">GoogleVision</a> thinks this image contains: &nbsp; </label></span> <%= wildlifePost.keywords.join(', ') %></li>
         <li class="list-group-item"><span class="boldText">Description: &nbsp; </span> <%= wildlifePost.description %></li>
       </ul>
       <div id="map" data-markers="<%= JSON.stringify([wildlifePost]) %>"></div></div>
@@ -36,7 +36,7 @@
     <% if(locals.isAuthenticated) { %>
             <form method="POST" action="/wildlifePosts/<%= wildlifePost.id %>/comments">
               <textarea name="content" class="form-control" id="content" placeholder="Leave a comment here..."></textarea>
-              <button class="btn btn-block">Leave a comment</button>
+              <button class="btn btn-block comment">Leave a comment</button>
             </form>
     <% } %>
   </div>
