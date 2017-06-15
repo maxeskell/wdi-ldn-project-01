@@ -1,16 +1,16 @@
 <div class="card profilePage">
+
   <div class="card-block">
     <img class="card-img-top" src="<%= user.image %>" height="100" width="100" alt="user profile image">
     <h3 class="card-title">Username: <%= user.username %></h4>
     <h4 class="card-title">Email: <%= user.email %></h4>
     <h4 class="card-title">Postcode: <%= user.postcode %></h4>
-    <h4 class="card-title">Github ID: <%= user.githubId %></h4>
+
     <form method="POST" action="/profile">
       <a href="/profile/edit" class="btn btn-warning btn-lg btn-block">Edit account</a>
       <input type="hidden" name="_method" value="DELETE">
       <button class="btn btn-danger btn-lg btn-block">Delete Account</button>
-
-
     </form>
   </div>
+  
 </div>
