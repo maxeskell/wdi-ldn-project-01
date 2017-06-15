@@ -68,6 +68,10 @@ main {
   }
 }
 
+.btn-warning {
+  margin-bottom: 5px;
+}
+
 .card.gallery {
   height: 260px;
   .image {
@@ -77,7 +81,7 @@ main {
   border-radius: 10px;
 }
 
-.newPage, .registerPage, .loginPage, .editPage, .profilePage, .mapPage, .showPost, .fourOfourPage, .fiveHundredPage {
+.newPage, .registerPage, .loginPage, .editPage, .profilePage, .mapPage, .showPost, .fourOfourPage, .fiveHundredPage, .userEditPage {
   background-color: white;
   margin-top: 2vh;
   border: 2px solid $main-text-color;

@@ -34,10 +34,12 @@ router.route('/wildlifePosts/:id/comments/:commentId')
   .delete(secureRoute, wildlifePostsController.deleteComment);
 
 router.route('/profile')
-  .get(secureRoute, registrations.show);
-
-router.route('/profile')
+  .get(secureRoute, registrations.show)
+  .post(secureRoute, upload.single('image'), registrations.update)
   .delete(secureRoute, registrations.delete);
+
+router.route('/profile/edit')
+  .get(secureRoute, registrations.edit);
 
 router.route('/register')
   .get(registrations.new)

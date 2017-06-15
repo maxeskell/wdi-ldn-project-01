@@ -28,9 +28,35 @@ function deleteRoute(req, res, next) {
     .catch(next);
 }
 
+function editRoute(req, res) {
+  return res.render('registrations/edit');
+}
+
+function updateRoute(req, res) {
+
+  console.log(req.body);
+
+  for (const field in req.body) {
+    req.user[field] = req.body[field];
+  }
+
+  return req.user.save()
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch(err => {
+      res.status(500).render('/statics/500', {
+        error: err
+      });
+    });
+}
+
+
 module.exports = {
   new: newRoute,
   show: showRoute,
   create: createRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  edit: editRoute,
+  update: updateRoute
 };

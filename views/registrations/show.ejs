@@ -7,8 +7,11 @@
     <h4 class="card-title">Github ID: <%= user.githubId %></h4>
     <h4 class="card-title">User details: <%= user %></h4>
     <form method="POST" action="/profile">
+      <a href="/profile/edit" class="btn btn-warning btn-lg btn-block">Edit account</a>
       <input type="hidden" name="_method" value="DELETE">
       <button class="btn btn-danger btn-lg btn-block">Delete Account</button>
+
+
     </form>
   </div>
 </div>
