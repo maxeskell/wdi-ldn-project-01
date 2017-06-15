@@ -19,6 +19,7 @@ $(function() {
   //only call on map API if there is a map on the page
   if ($map.length > 0) initMap();
 
+  //initialise google map
   function initMap() {
     map = new google.maps.Map($map.get(0), {
       scrollwheel: false,
@@ -29,29 +30,32 @@ $(function() {
       zoom: 14
     });
     infoWindow = new google.maps.InfoWindow();
-    //get user location and re-center map
+    //get user location and marker locations and scale map to show them all
     getUserLocation();
     //if the map has a data-marker then call create markers function
-    // const dataArray = $map.data('markers');
     if (dataArray) createMarkers(dataArray);
     //if the map has a class of new then call click event and locastion capture function
     if ($map.hasClass('new')) captureLocation();
   }
 
   function getUserLocation() {
+    //get user location from the browser if enabled
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         userLatLng = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        //create info window to show user where they are
         infoWindow.setPosition(userLatLng);
         infoWindow.setContent('You are here.');
         infoWindow.open(map);
+        //use user location and marker locations to re-scale the map
         setLocationandZoom();
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
+      //if brower location is turned off then use postcode to find users location
     } else if ($map.data('markers')[0].postcode) {
       const postcode = $map.data('markers')[0].postcode;
       $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y`)
@@ -61,6 +65,11 @@ $(function() {
             lat: userLocation.lat,
             lng: userLocation.lng
           };
+          //create info window to show user where they are
+          infoWindow.setPosition(userLatLng);
+          infoWindow.setContent('You are here.');
+          infoWindow.open(map);
+          //use user location and marker locations to re-scale the map
           setLocationandZoom();
         });
     } else {
@@ -90,12 +99,11 @@ $(function() {
         position: latLng,
         map: map
       });
-
+      //add listener to markers so that when clicjed they show an infowindow (popup)
       marker.addListener('click', () => {
         markerClick(marker, location);
-        console.log('MARKERS', markers);
       });
-
+      //stores markers as an array so that we can re-size the map
       markers.push(marker);
     });
   }
@@ -117,18 +125,17 @@ $(function() {
     infoWindow.open(map, marker);
   }
 
+  //using user location and marker location array re-scale the map to show them all
   function setLocationandZoom() {
     //change zoom on map to show all markers
     for (var i = 0; i < markers.length; i++) {
       bounds.extend(markers[i].getPosition());
     }
-
     bounds.extend(userLatLng);
-    console.log('settting map position...');
     map.fitBounds(bounds);
   }
 
-  //function to grab location value from the map
+  //function to grab location value from the map when the map is clicked on (to record location for new images)
   function captureLocation() {
     const marker = new google.maps.Marker({
       map
@@ -142,8 +149,10 @@ $(function() {
     });
   }
 
+  //only call on GoogleVision api when on the create new post page
   if ($checkboxes.length > 0) googleVision();
 
+  //call on GoogleVision API to find what is in the image
   function googleVision() {
     // Grabbing the file upload element from the form
     var $file = document.querySelector('input[type="file"]');
@@ -164,7 +173,7 @@ $(function() {
         console.log('Error: ', error);
       };
     }
-
+    //specific request to return what is in the image (LABLE)
     function sendVisionRequest(base64String) {
       const base64 = base64String.match(/base64,(.*)$/)[1];
       const data = {
@@ -178,6 +187,7 @@ $(function() {
         }]
       };
 
+      //get response from GoogleVision and push it to page in the form of checkboxes
       $.ajax({
         method: 'POST',
         url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBcptw5kLGKD1dAUtrC91WtQ5H48zga-_Y',

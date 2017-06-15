@@ -6,6 +6,7 @@ const oauth = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
 const upload = require('../lib/upload');
 
+//resource routes
 router.get('/', (req, res) => res.render('statics/homepage'));
 
 router.route('/wildlifePosts')
@@ -33,6 +34,7 @@ router.route('/wildlifePosts/:id/comments')
 router.route('/wildlifePosts/:id/comments/:commentId')
   .delete(secureRoute, wildlifePostsController.deleteComment);
 
+//user routes
 router.route('/profile')
   .get(secureRoute, registrations.show)
   .post(secureRoute, upload.single('image'), registrations.update)
@@ -55,6 +57,7 @@ router.route('/logout')
 router.route('/oauth/github')
   .get(oauth.github);
 
+//catch all for errors
 router.all('*', (req, res) => res.notFound());
 
 module.exports = router;
