@@ -15,7 +15,7 @@ const facebook = {
   accessTokenURL: 'https://graph.facebook.com/v2.9/oauth/access_token',
   clientId: process.env.FB_OAUTH_ID_PROPJECT1,
   clientSecret: process.env.FB_OAUTH_SECRET_PROPJECT1,
-  redirectURL: 'http://localhost:8000/oauth/facebook',
+  redirectURL: 'https://mysterious-journey-82229.herokuapp.com/oauth/facebook',
   scope: 'email',
   getLoginURL() {
     return `${this.loginURL}?client_id=${this.clientId}&redirect_uri=${this.redirectURL}&scope=${this.scope}`;
