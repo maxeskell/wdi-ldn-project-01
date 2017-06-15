@@ -34,8 +34,6 @@ function editRoute(req, res) {
 
 function updateRoute(req, res) {
 
-  console.log(req.body);
-
   for (const field in req.body) {
     req.user[field] = req.body[field];
   }

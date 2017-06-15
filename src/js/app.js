@@ -89,7 +89,6 @@ $(function() {
 
   //function to create markers
   function createMarkers(dataArray) {
-    console.log('creating markers...');
     dataArray.forEach((location) => {
       const latLng = {
         lat: location.lat,
@@ -112,7 +111,6 @@ $(function() {
   function markerClick(marker, location) {
 
     if (infoWindow) infoWindow.close();
-    console.log(location);
 
     infoWindow = new google.maps.InfoWindow({
       content: `

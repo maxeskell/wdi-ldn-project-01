@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, match: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/ },
-  email: { type: String },
+  username: { type: String, trim: true, required: true, match: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/ },
+  email: { type: String , trim: true },
   postcode: { type: String, match: /[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9][A-Z]{2}/},
   lat: { Number },
   lng: { Number },
   image: { type: String },
   password: { type: String, match: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/ },
-  githubId: { type: Number }
+  githubId: { type: Number },
+  facebookId: {type: Number }
 });
 
 userSchema
@@ -20,7 +21,7 @@ userSchema
 
 // lifecycle hook - mongoose middleware
 userSchema.pre('validate', function checkPassword(next) {
-  if(!this.password && !this.githubId) {
+  if(!this.password && !this.githubId && !this.facebookId ) {
     this.invalidate('password', 'required');
   }
   if(this.password && this._passwordConfirmation !== this.password){

@@ -50,6 +50,55 @@ function github(req, res, next) {
   .catch(next);
 }
 
+function facebook(req, res, next) {
+  return rp({
+    method: 'GET',
+    url: config.facebook.accessTokenURL,
+    qs: {
+      client_id: config.facebook.clientId,
+      redirect_uri: config.facebook.redirectURL,
+      client_secret: config.facebook.clientSecret,
+      code: req.query.code
+    },
+    json: true
+  })
+  .then((token) => {
+    return rp({
+      method: 'GET',
+      url: 'https://graph.facebook.com/v2.5/me?fields=id,name,email,picture.height(961)',
+      qs: token,
+      json: true
+
+    });
+  })
+  .then((profile) => {
+    return User
+      .findOne({ $or: [{ email: profile.email }, { facebookId: profile.id }] })
+      .then((user) => {
+        if(!user) {
+          user = new User({
+            username: profile.name,
+            email: profile.email,
+            image: profile.picture.data.url
+          });
+        }
+        console.log(profile);
+
+        user.facebookId = profile.id;
+        return user.save();
+      });
+  })
+  .then((user) => {
+    console.log('*******', user);
+    req.session.userId = user.id;
+    req.session.isAuthenticated = true;
+
+    req.flash('info', `Welcome back, ${user.username}!`);
+    res.redirect('/profile');
+  })
+  .catch(next);
+}
+
 module.exports = {
-  github
+  github, facebook
 };

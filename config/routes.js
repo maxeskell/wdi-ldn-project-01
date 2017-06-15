@@ -56,6 +56,9 @@ router.route('/logout')
 
 router.route('/oauth/github')
   .get(oauth.github);
+  
+router.route('/oauth/facebook')
+  .get(oauth.facebook);
 
 //catch all for errors
 router.all('*', (req, res) => res.notFound());

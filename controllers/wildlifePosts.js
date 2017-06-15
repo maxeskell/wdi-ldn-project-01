@@ -5,7 +5,6 @@ function wildlifePostsIndex(req, res) {
   const query = {
     title: regex
   };
-  console.log(regex);
   WildlifePosts
     .find(query)
     .populate('createdBy')
@@ -68,7 +67,6 @@ function wildlifePostsCreate(req, res, next) {
 
   if (req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
-  console.log(req.body);
 
   WildlifePosts
     .create(req.body)
