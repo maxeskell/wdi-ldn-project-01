@@ -3,7 +3,7 @@
 /* global google:true */
 
 $(function() {
-
+  //jquery constants
   const $map = $('#map');
   const $lat = $('#lat');
   const $lng = $('#lng');
